@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'components/bettery_status.dart';
+import 'components/temp_detail.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -64,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  @override //khởi tạo 
+  @override //khởi tạo
   void initState() {
     setupBatteryAnimation();
     setupTempAnimation();
@@ -72,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.initState();
   }
 
-  @override // hủy biến tạm 
+  @override // hủy biến tạm
   void dispose() {
     _batteryAnimationController.dispose();
     _tempAnimationController.dispose();
@@ -86,6 +87,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         animation: Listenable.merge([
           _controller,
           _batteryAnimationController,
+          _tempAnimationController,
         ]),
         builder: (context, _) {
           return Scaffold(
@@ -95,6 +97,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   _batteryAnimationController.forward();
                 else if (_controller.selectedBottomTab == 1 && index != 1)
                   _batteryAnimationController.reverse(from: 0.7);
+
+                if (index == 2)
+                  _tempAnimationController.forward();
+                else if (_controller.selectedBottomTab == 2 && index != 2)
+                  _tempAnimationController.reverse(from: 0.4);
               },
               selectedTab: _controller.selectedBottomTab,
             ),
@@ -198,6 +205,32 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ),
 
                     //--------------------temp----------//
+                    Positioned(
+                      height: constrains.maxHeight,
+                      width: constrains.maxWidth,
+                      top: 60 * (1 - _animationTempShowInfo.value),
+                      child: Opacity(
+                        opacity: _animationTempShowInfo.value,
+                        child: TempDetails(controller: _controller),
+                      ),
+                    ),
+                    Positioned(
+                      right: -180 * (1 - _animationCoolGlow.value),
+                      child: AnimatedSwitcher(
+                        duration: defaultDuration,
+                        child: _controller.isCoolSelected
+                            ? Image.asset(
+                                "assets/images/Cool_glow_2.png",
+                                key: UniqueKey(),
+                                width: 200,
+                              )
+                            : Image.asset(
+                                "assets/images/Hot_glow_4.png",
+                                key: UniqueKey(),
+                                width: 200,
+                              ),
+                      ),
+                    ),
                   ]);
                 },
               ),

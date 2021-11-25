@@ -8,14 +8,14 @@ class HomeController extends ChangeNotifier {
     selectedBottomTab = index;
     notifyListeners(); // lắng nghe
   }
-  
+
   //------------Door-----------------//
   bool isRightDoorLock = true;
   bool isLeftDoorLock = true;
   bool isBonnetLock = true;
   bool isTrunkLock = true;
 
-    void updateRightDoorLock() {
+  void updateRightDoorLock() {
     isRightDoorLock = !isRightDoorLock;
     notifyListeners();
   }
@@ -34,6 +34,12 @@ class HomeController extends ChangeNotifier {
     isTrunkLock = !isTrunkLock;
     notifyListeners();
   }
-  
 
+  //-------temp--------//
+  bool isCoolSelected = true;
+
+  void updateCoolSelectedTab() {
+    isCoolSelected = !isCoolSelected;
+    notifyListeners();
+  }
 }
