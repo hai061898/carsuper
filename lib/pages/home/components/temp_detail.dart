@@ -51,7 +51,7 @@ class TempDetails extends StatelessWidget {
                 icon: Icon(Icons.arrow_drop_up, size: 48),
               ),
               Text(
-                "29" + "\u2103",
+                "29" + "C",
                 style: TextStyle(fontSize: 86),
               ),
               IconButton(
@@ -73,7 +73,7 @@ class TempDetails extends StatelessWidget {
                     "Inside".toUpperCase(),
                   ),
                   Text(
-                    "20" + "\u2103",
+                    "20" + "C",
                     style: Theme.of(context).textTheme.headline5,
                   )
                 ],
@@ -87,7 +87,7 @@ class TempDetails extends StatelessWidget {
                     style: TextStyle(color: Colors.white54),
                   ),
                   Text(
-                    "35" + "\u2103",
+                    "35" + "C",
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
